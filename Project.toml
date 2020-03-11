@@ -1,0 +1,4 @@
+name = "HPFilter"
+uuid = "d73ad930-938d-4709-8eff-50e740f82fcd"
+authors = ["Stefan Brinkmann <stefan.brinkmann@posteo.de>"]
+version = "0.1.0"
