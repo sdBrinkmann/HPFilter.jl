@@ -2,3 +2,8 @@ name = "HPFilter"
 uuid = "d73ad930-938d-4709-8eff-50e740f82fcd"
 authors = ["Stefan Brinkmann <stefan.brinkmann@posteo.de>"]
 version = "0.1.0"
+
+[deps]
+HypothesisTests = "09f84164-cd44-5f33-b23f-e6b0d136a0d5"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"

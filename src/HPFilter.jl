@@ -1,9 +1,12 @@
 module HPFilter
 
-import LinearAlgebra
-import SparseArrays
+using LinearAlgebra
+using SparseArrays
+using  HypothesisTests
 
-include("")
+include("HPFilterFunc.jl")
 greet() = print("Hello World!")
+
+export HPfilter
 
 end # module
