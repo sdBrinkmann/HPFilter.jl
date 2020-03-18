@@ -1,11 +1,11 @@
 
 """
-    HPfilter(x::Vector, λ::Int)
+    HP(x::Vector, λ::Int)
 
 Apply the Hodrick-Prescott decomposition to vector x with multiplier value λ
 """
 
-function HPfilter(x::Vector, λ::Int)
+function HP(x::Vector, λ::Int)
     n = length(x)
     m = 2
     @assert n > m
@@ -18,12 +18,12 @@ function HPfilter(x::Vector, λ::Int)
 end
 
 """
-    HPfilter(x::Vector, λ::Int, iter::Int = 1)
+    HP(x::Vector, λ::Int, iter::Int = 1)
 
 Compute boosted Hodrick-Prescott filter with number of iterations specified by iter
 """
 
-function HPfilter(x::Vector, λ::Int, iter::Int = 1)
+function HP(x::Vector, λ::Int, iter::Int = 1)
     n = length(x)
     m = 2
     @assert n > m
@@ -50,7 +50,7 @@ end
 
 
 """
-    bHPfilter(x::Vector, λ::Int; Criterion="BIC", max_iter::Int = 100, p::Float64=0.05)
+    bHP(x::Vector, λ::Int; Criterion="BIC", max_iter::Int = 100, p::Float64=0.05)
 
 Compute boosted Hodrick-Prescott filter with stop criterion using either a Bayesian-type
 information criterion (BIC) or an augmented Dickey-Fuller (ADF) test
@@ -59,7 +59,7 @@ information criterion (BIC) or an augmented Dickey-Fuller (ADF) test
 
 ######
 
-function bHPfilter(x::Vector, λ::Int; Criterion="BIC", max_iter::Int = 100, p::Float64=0.05)
+function bHP(x::Vector, λ::Int; Criterion="BIC", max_iter::Int = 100, p::Float64=0.05)
     n = length(x)
     m = 2
     @assert n > m
@@ -94,6 +94,7 @@ function bHPfilter(x::Vector, λ::Int; Criterion="BIC", max_iter::Int = 100, p::
     end
 
     if Criterion == "ADF"
+        iter = max_iter
         function solve(S,x,iter,p)
             f = S \ x
             p_adf = pvalue( ADFTest(x-f, :trend, Int(floor((length(x)-1)^(1/3)))))
