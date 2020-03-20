@@ -9,14 +9,14 @@ The original implementation in R by one of the coauthors can be found [here](htt
 Get Started
 -----------------
 This module can either be employed  by cloning this repository or by using the Julia package manager.
-With the package manager type in the Julia  REPL:
+With the package manager simply use the add command:
 ```Julia
-(v1.2) pkg> add https://github.com/sdBrinkmann/HPFilter.jl
+(v1.3) pkg> add https://github.com/sdBrinkmann/HPFilter.jl
 ```
 
 Usage
 ----------------
-The basic usage will be demonstrated with the US industrial production index (IPI) provided by [FRED data service](https://fred.stlouisfed.org/series/IPB50001SQ).
+The basic usage will be demonstrated with the [US industrial production index (IPI)](https://fred.stlouisfed.org/series/IPB50001SQ) provided by FRED data service.
 
 ```Julia
 using HPFilter
