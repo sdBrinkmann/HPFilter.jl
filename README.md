@@ -15,6 +15,24 @@ using Pkg
 Pkg.add("https://github.com/sdbrinkmann/HPFilter.jl.git")
 ```
 
-Example
+Usage
 ----------------
+The basic usage will be demonstrated with the US industrial production index (IPI) provided from FRED data service.
 
+```Julia
+using HPFilter
+using CSV
+
+IPI = CSV.read("/run/media/admin/Utility/Julia/IPB50001SQ.csv", copycols=true)
+
+# HP filter with \lambda = 1600
+hp = HP(IPI[!, 2], 1600)
+
+#Boosted HP filter with baysian-type information criterion (BIC)
+bHP_bic = bHP(IPI[!, 2], 1600, Criterion="BIC")
+
+#Boosted HP filter with augmented Dickey-Fuller (ADF) test 
+bHP_adf = bHP(IPI[!, 2], 1600, Criterion="ADF", p=0.01)
+```
+
+![HP Results](IPI_HP.png "Plotted Results")
