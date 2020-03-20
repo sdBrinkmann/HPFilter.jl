@@ -11,21 +11,23 @@ Get Started
 This module can either be employed  by cloning this repository or by using the Julia package manager.
 With the package manager type in the Julia  REPL:
 ```Julia
-using Pkg
-Pkg.add("https://github.com/sdbrinkmann/HPFilter.jl.git")
+(v1.2) pkg> add https://github.com/sdBrinkmann/HPFilter.jl
 ```
 
 Usage
 ----------------
-The basic usage will be demonstrated with the US industrial production index (IPI) provided from FRED data service.
+The basic usage will be demonstrated with the US industrial production index (IPI) provided by [FRED data service](https://fred.stlouisfed.org/series/IPB50001SQ).
 
 ```Julia
 using HPFilter
 using CSV
 
-IPI = CSV.read("/run/media/admin/Utility/Julia/IPB50001SQ.csv", copycols=true)
+# Set path to directory where time series is located
+path = "/.../data"
 
-# HP filter with \lambda = 1600
+IPI = CSV.read("$(path)/IPB50001SQ.csv", copycols=true)
+
+# HP filter with λ = 1600
 hp = HP(IPI[!, 2], 1600)
 
 #Boosted HP filter with baysian-type information criterion (BIC)
