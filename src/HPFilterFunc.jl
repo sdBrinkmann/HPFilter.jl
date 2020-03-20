@@ -68,9 +68,10 @@ function bHP(x::Vector, λ::Int; Criterion="BIC", max_iter::Int = 100, p::Float6
         -1 => fill(-2, n-m),
         -2 => fill(1, n-m) )
     @inbounds D = D[1:n,1:n-m]
-    S = inv(I + λ * D * D')
+    S = I + λ * D * D'
 
     if Criterion == "BIC"
+        S = inv(S)
         c_j = x
         c_p = Array{Float64, 1}()
         c_hp = Array{Float64, 1}()
