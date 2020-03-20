@@ -16,7 +16,7 @@ With the package manager simply use the add command:
 
 Usage
 ----------------
-The basic usage will be demonstrated with the [US industrial production index (IPI)](https://fred.stlouisfed.org/series/IPB50001SQ) provided by FRED data service.
+The basic usage is demonstrated with the [US industrial production index (IPI)](https://fred.stlouisfed.org/series/IPB50001SQ) provided by FRED data service.
 
 ```Julia
 using HPFilter
@@ -30,10 +30,10 @@ IPI = CSV.read("$(path)/IPB50001SQ.csv", copycols=true)
 # HP filter with λ = 1600
 hp = HP(IPI[!, 2], 1600)
 
-#Boosted HP filter with baysian-type information criterion (BIC)
+# Boosted HP filter with baysian-type information criterion (BIC)
 bHP_bic = bHP(IPI[!, 2], 1600, Criterion="BIC")
 
-#Boosted HP filter with augmented Dickey-Fuller (ADF) test 
+# Boosted HP filter with augmented Dickey-Fuller (ADF) test 
 bHP_adf = bHP(IPI[!, 2], 1600, Criterion="ADF", p=0.01)
 ```
 
