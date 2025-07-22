@@ -10,10 +10,10 @@ function HP(x::Vector, λ::Int)
     m = 2
     @assert n > m
     I = Diagonal(ones(n))
-    D = spdiagm(0 => fill(1, n-m),
-        -1 => fill(-2, n-m),
-        -2 => fill(1, n-m) )
-    @inbounds D = D[1:n,1:n-m]
+    D = spdiagm(n, n-m, 0 => fill(1.0, n-m),
+        -1 => fill(-2.0, n-m),
+        -2 => fill(1.0, n-m) )
+    #@inbounds D = D[1:n,1:n-m]
     return (I + λ * D * D') \ x
 end
 
@@ -28,10 +28,10 @@ function HP(x::Vector, λ::Int, iter::Int = 1)
     m = 2
     @assert n > m
     I = Diagonal(ones(n))
-    D = spdiagm(0 => fill(1, n-m),
-        -1 => fill(-2, n-m),
-        -2 => fill(1, n-m) )
-    @inbounds D = D[1:n,1:n-m]
+    D = spdiagm(n, n-m, 0 => fill(1.0, n-m),
+        -1 => fill(-2.0, n-m),
+        -2 => fill(1.0, n-m) )
+    #@inbounds D = D[1:n,1:n-m]
     S = (I + λ * D * D')
     #G = "Test for scope"
     function solve(S,x,iter)
@@ -64,10 +64,10 @@ function bHP(x::Vector, λ::Int; Criterion="BIC", max_iter::Int = 100, p::Float6
     m = 2
     @assert n > m
     I = Diagonal(ones(n))
-    D = diagm(0 => fill(1, n-m),
-        -1 => fill(-2, n-m),
-        -2 => fill(1, n-m) )
-    @inbounds D = D[1:n,1:n-m]
+    D = diagm(n, n-m, 0 => fill(1.0, n-m),
+        -1 => fill(-2.0, n-m),
+        -2 => fill(1.0, n-m) )
+    #@inbounds D = D[1:n,1:n-m]
     S = I + λ * D * D'
 
     if Criterion == "BIC"
@@ -75,7 +75,7 @@ function bHP(x::Vector, λ::Int; Criterion="BIC", max_iter::Int = 100, p::Float6
         c_j = x
         c_p = Array{Float64, 1}()
         c_hp = Array{Float64, 1}()
-        B = 1
+        B = 1.0
         IC = Vector{Float32}()
         for i in 1:max_iter
             c_p = c_j

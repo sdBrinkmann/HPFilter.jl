@@ -28,6 +28,9 @@ IPI = CSV.read("/run/media/admin/Utility/Julia/IPB50001SQ.csv", copycols=true)
 # HP filter with \lambda = 1600
 hp = HP(IPI[!, 2], 1600)
 
+# Boosted HP with 100 iterations
+hp_100 = HP(IPI[!, 2], 1600 , 100)
+
 #Boosted HP filter with baysian-type information criterion (BIC)
 bHP_bic = bHP(IPI[!, 2], 1600, Criterion="BIC")
 
