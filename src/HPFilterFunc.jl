@@ -23,7 +23,7 @@ end
 Compute boosted Hodrick-Prescott filter with number of iterations specified by iter
 """
 
-function HP(x::Vector, λ::Int, iter::Int = 1)
+function HP(x::Vector, λ::Int, iter::Int)
     n = length(x)
     m = 2
     @assert n > m
