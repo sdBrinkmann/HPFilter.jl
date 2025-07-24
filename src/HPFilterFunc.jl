@@ -9,7 +9,7 @@ function HP(x::Vector, λ::Real)
     n = length(x)
     m = 2
     @assert n > m
-    I = Diagonal(ones(n))
+    #I = Diagonal(ones(n))
     D = spdiagm(n, n-m, 0 => fill(1.0, n-m),
         -1 => fill(-2.0, n-m),
         -2 => fill(1.0, n-m) )
@@ -63,7 +63,7 @@ function bHP(x::Vector, λ::Real; Criterion="BIC", max_iter::Int = 100, p::Float
     n = length(x)
     m = 2
     @assert n > m
-    I = Diagonal(ones(n))
+    #I = Diagonal(ones(n))
     D = diagm(n, n-m, 0 => fill(1.0, n-m),
         -1 => fill(-2.0, n-m),
         -2 => fill(1.0, n-m) )
@@ -87,7 +87,7 @@ function bHP(x::Vector, λ::Real; Criterion="BIC", max_iter::Int = 100, p::Float
             B_j = I - B
             push!(IC, var(c_j) / var(c_hp) + log(n) * tr(B_j) / tr(I - S))
             if i > 1 && IC[i] > IC[i-1]
-                println("Number of iterations = $(i-1)")
+                #println("Number of iterations = $(i-1)")
                 break
             end
         end
@@ -99,11 +99,11 @@ function bHP(x::Vector, λ::Real; Criterion="BIC", max_iter::Int = 100, p::Float
         function solve(S,x,iter,p)
             f = S \ x
             p_adf = pvalue( ADFTest(x-f, :trend, Int(floor((length(x)-1)^(1/3)))))
-            println("p-value %f \n", p_adf)
             if iter > 1 && p_adf > p
                 return solve(S,x-f,iter-1,p)
             else
-                println("Number of iterations: %d \n", max_iter  - iter + 1)
+                println("p-value: ", p_adf)
+                println("Number of iterations: ", max_iter  - iter + 1)
                 return x-f
             end
         end
