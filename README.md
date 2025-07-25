@@ -2,39 +2,39 @@ HPFilter.jl
 =====================
 
 HPFilter.jl is a Julia module that implements the Hodrick-Prescott (HP) Filter as well as the 
-boosted HP Filter based on based on Peter Phillips and Zhentao Shi (2019): "[Boosting the Hodrick-Prescott Filter](https://arxiv.org/abs/1905.00175)".
+boosted HP Filter based on Peter Phillips and Zhentao Shi (2019): "[Boosting the Hodrick-Prescott Filter](https://arxiv.org/abs/1905.00175)".
 
 The original implementation in R by one of the coauthors can be found [here](https://github.com/zhentaoshi/Boosted_HP_filter).
 
 Get Started
 -----------------
 This module can either be employed  by cloning this repository or by using the Julia package manager.
-With the package manager type in the Julia  REPL:
+With the package manager simply use the add command:
 ```Julia
-using Pkg
-Pkg.add("https://github.com/sdbrinkmann/HPFilter.jl.git")
+(v1.3) pkg> add https://github.com/sdBrinkmann/HPFilter.jl
 ```
 
 Usage
 ----------------
-The basic usage will be demonstrated with the US industrial production index (IPI) provided from FRED data service.
+The basic usage is demonstrated with the [US industrial production index (IPI)](https://fred.stlouisfed.org/series/IPB50001SQ) provided by FRED data service.
 
 ```Julia
 using HPFilter
 using CSV
 
-IPI = CSV.read("/run/media/admin/Utility/Julia/IPB50001SQ.csv", copycols=true)
+# Set path to directory where time series is located
+path = "/.../data"
 
-# HP filter with \lambda = 1600
+IPI = CSV.read("$(path)/IPB50001SQ.csv", copycols=true)
+
+# HP filter with λ = 1600
 hp = HP(IPI[!, 2], 1600)
 
-# Boosted HP with 100 iterations
-hp_100 = HP(IPI[!, 2], 1600 , 100)
 
-#Boosted HP filter with baysian-type information criterion (BIC)
+# Boosted HP filter with baysian-type information criterion (BIC)
 bHP_bic = bHP(IPI[!, 2], 1600, Criterion="BIC")
 
-#Boosted HP filter with augmented Dickey-Fuller (ADF) test 
+# Boosted HP filter with augmented Dickey-Fuller (ADF) test 
 bHP_adf = bHP(IPI[!, 2], 1600, Criterion="ADF", p=0.01)
 ```
 
