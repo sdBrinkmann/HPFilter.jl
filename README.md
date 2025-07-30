@@ -1,7 +1,7 @@
 HPFilter.jl
 =====================
 
-HPFilter.jl is a Julia module that implements the Hodrick-Prescott (HP) filter as well as the its generalization
+HPFilter.jl is a Julia module that implements the Hodrick-Prescott (HP) filter as well as its generalization,
 generally known as Whittaker-Henderson smoothing, in this package named bohl_filter after its first inventor George Bohlmann.
 
 In addition this module tries to implement also more novel approaches, so far the boosted HP Filter based 
