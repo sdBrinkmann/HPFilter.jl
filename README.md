@@ -1,17 +1,21 @@
 HPFilter.jl
 =====================
 
-HPFilter.jl is a Julia module that implements the Hodrick-Prescott (HP) Filter as well as the 
-boosted HP Filter based on Peter Phillips and Zhentao Shi (2019): "[Boosting the Hodrick-Prescott Filter](https://arxiv.org/abs/1905.00175)".
+HPFilter.jl is a Julia module that implements the Hodrick-Prescott (HP) filter as well as the its generalization
+generally known as Whittaker-Henderson smoothing, in this package named bohl_filter after its first inventor George Bohlmann.
 
-The original implementation in R by one of the coauthors can be found [here](https://github.com/zhentaoshi/Boosted_HP_filter).
+In addition this module tries to implement also more novel approaches, so far the boosted HP Filter based 
+on Peter Phillips and Zhentao Shi (2019): "[Boosting the Hodrick-Prescott Filter](https://arxiv.org/abs/1905.00175)" 
+has been implemented.
+
+
 
 Get Started
 -----------------
 This module can either be employed  by cloning this repository or by using the Julia package manager.
 With the package manager simply use the add command:
 ```Julia
-(v1.3) pkg> add https://github.com/sdBrinkmann/HPFilter.jl
+(v1.11) pkg> add https://github.com/sdBrinkmann/HPFilter.jl
 ```
 
 Usage
@@ -30,6 +34,8 @@ IPI = CSV.read("$(path)/IPB50001SQ.csv", copycols=true)
 # HP filter with λ = 1600
 hp = HP(IPI[!, 2], 1600)
 
+# The above is equivalent to Whittaker-Henderson smoothing with m = 2 differentation
+wh = bohl_filter(IPI[!, 2], 2, 1600)
 
 # Boosted HP filter with baysian-type information criterion (BIC)
 bHP_bic = bHP(IPI[!, 2], 1600, Criterion="BIC")

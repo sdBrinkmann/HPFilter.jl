@@ -2,7 +2,8 @@
 """
     HP(x::Vector, λ::Real)
 
-Apply the Hodrick-Prescott decomposition to vector x with multiplier value λ
+Apply the Hodrick-Prescott decomposition to vector x with multiplier value λ.
+Function returns the trend component.
 """
 
 function HP(x::Vector, λ::Real)
@@ -20,7 +21,8 @@ end
 """
     HP(x::Vector, λ::Real, iter::Int)
 
-Compute boosted Hodrick-Prescott filter with number of iterations specified by iter
+Compute boosted Hodrick-Prescott filter with number of iterations specified by iter.
+Function returns the trend component.
 """
 
 function HP(x::Vector, λ::Real, iter::Int)
@@ -53,7 +55,8 @@ end
     bHP(x::Vector, λ::Real; Criterion="BIC", max_iter::Int = 100, p::Float64=0.05)
 
 Compute boosted Hodrick-Prescott filter with stop criterion using either a Bayesian-type
-information criterion (BIC) or an augmented Dickey-Fuller (ADF) test
+information criterion (BIC) or an augmented Dickey-Fuller (ADF) test.
+Function returns the trend component.
 
 """
 
@@ -87,7 +90,7 @@ function bHP(x::Vector, λ::Real; Criterion="BIC", max_iter::Int = 100, p::Float
             B_j = I - B
             push!(IC, var(c_j) / var(c_hp) + log(n) * tr(B_j) / tr(I - S))
             if i > 1 && IC[i] > IC[i-1]
-                #println("Number of iterations = $(i-1)")
+                println("Number of iterations = $(i-1)")
                 break
             end
         end
@@ -109,4 +112,32 @@ function bHP(x::Vector, λ::Real; Criterion="BIC", max_iter::Int = 100, p::Float
         end
         return x - solve(S,x,iter,p)
     end
+end
+
+
+
+function difference_coeff(m :: Int)
+    float.([binomial(m, d) * (-1)^d for d in 0:m])
+end
+
+
+function difference_matrix(n :: Int, m :: Int)
+    spdiagm(n, n-m, (0:-1:-m .=> fill.(difference_coeff(m), n-m))...)
+end
+
+
+"""
+    bohl_filter(x :: Vector, m :: Int, λ :: Real)
+
+This is the generalization of the Hodrick-Prescott filter,
+also known as Whittaker-Henderson smoothing,
+using the m-th difference to estimate the trend component.
+"""
+
+
+function bohl_filter(x :: Vector, m :: Int, λ :: Real)
+    n = length(x)
+    @assert n > m
+    D = difference_matrix(n, m)
+    return (I + λ * D * D') \ x
 end

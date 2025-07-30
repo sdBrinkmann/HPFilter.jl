@@ -8,6 +8,6 @@ using Statistics
 include("HPFilterFunc.jl")
 greet() = print("Hello World!")
 
-export HP, bHP
+export HP, bHP, bohl_filter
 
 end # module
