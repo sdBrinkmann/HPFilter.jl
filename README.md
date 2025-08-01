@@ -34,7 +34,7 @@ IPI = CSV.read("$(path)/IPB50001SQ.csv", copycols=true)
 # HP filter with λ = 1600
 hp = HP(IPI[!, 2], 1600)
 
-# The above is equivalent to Whittaker-Henderson smoothing with m = 2 differentation
+# The above is equivalent to Whittaker-Henderson smoothing with m = 2 differentiation
 wh = bohl_filter(IPI[!, 2], 2, 1600)
 
 # Boosted HP filter with baysian-type information criterion (BIC)
