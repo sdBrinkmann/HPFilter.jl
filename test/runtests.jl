@@ -1,7 +1,7 @@
 println("Testing...")
 
 using Random, Distributions, Statistics, Test
-using HPFilter
+using TrendDecomposition
 
 Random.seed!(7886)
 
