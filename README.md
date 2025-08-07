@@ -1,7 +1,7 @@
 TrendDecomposition.jl
 =====================
 
-TrendDecomposition.jl is a Julia module for decomposition of time series into trend and cycle components. More generally it provides 
+TrendDecomposition.jl is a Julia package for decomposition of time series into trend and cycle components. More generally it provides 
 both (stochastic) trend component estimation and forecasting, though not all methods are suitable for forecasting.
 
 By using filters and smoothers the most pragmatic approach to trend decomposition is estimating the trend $t$ and defining
@@ -9,7 +9,7 @@ the cyclical component $c$ of time series $y$ as $c = y - t$.
 Often it is up to the user of this module to calculate the cyclical components themselves with the computed trend returned from a function 
 provided by this module.
 
-For now this module implements the Hodrick-Prescott (HP) filter as well as its generalization,
+For now this package implements the Hodrick-Prescott (HP) filter as well as its generalization,
 generally known as Whittaker-Henderson smoothing, in this package named bohl_filter after its first inventor George Bohlmann.
 
 In addition this module tries to implement also more novel approaches; so far the boosted HP Filter based 
@@ -20,11 +20,24 @@ has been implemented.
 
 Get Started
 -----------------
-This module can either be employed  by cloning this repository or by using the Julia package manager.
+This package is now featured on the official general Julia package registry. 
+Simply use Julia's package manager pkg to add TrendDecomposition to your preferred environment.
+
+```Julia
+@(v1.11) pkg> add TrendDecomposition
+
+julia> using TrendDecomposition
+```
+
+The developing branch of this package can either be employed  by cloning this repository or by using the Julia package manager.
 With the package manager simply use the add command:
 ```Julia
-(v1.11) pkg> add https://github.com/sdBrinkmann/TrendDecomposition.jl
+@(v1.11) pkg> add https://github.com/sdBrinkmann/TrendDecomposition.jl
 ```
+[!IMPORTANT]
+This package is currently under rapid development and follows Semantic Versioning. Until the 1.0.0
+release is reached, the API of this package can change with any minor version update, please 
+consult the documentation of this package after each update when using this package.
 
 Usage
 ----------------
