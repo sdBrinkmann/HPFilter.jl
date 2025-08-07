@@ -34,10 +34,10 @@ With the package manager simply use the add command:
 ```Julia
 @(v1.11) pkg> add https://github.com/sdBrinkmann/TrendDecomposition.jl
 ```
-[!IMPORTANT]
-This package is currently under rapid development and follows Semantic Versioning. Until the 1.0.0
-release is reached, the API of this package can change with any minor version update, please 
-consult the documentation of this package after each update when using this package.
+> [!IMPORTANT]
+> This package is currently under rapid development and follows Semantic Versioning. Until the 1.0.0 release is reached,
+>  the API of this package can change with any minor version update, 
+> please  consult the documentation of this package after each update when using this package.
 
 Usage
 ----------------
